@@ -58,13 +58,18 @@ def display_lines(lines, cursor=True):
 
 def main(chat):
     old_cache = False
+    wait = 0.0
+    wait_max = 10
     while True:
         with open(chat) as chat_file:
             cache = chat_file.readlines()
             if cache != old_cache:
                 display_lines(cache)
+                wait = 0.0
+            elif wait < wait_max:
+                wait += 0.1
         old_cache = cache
-        #time.sleep(1)
+        time.sleep(wait)
             
 
 if __name__ == "__main__":
